@@ -1,0 +1,10 @@
+This is the structure of the game Middle Earth Roguelike (merl) being designed by Aaron DeMarche. I this is starting out as a project with the intent of learning the art of game design and programming in the sphere of python. The hope is to make this game completely cross platform and eventually having a working game for people to play.
+
+First I want the game to be based on the universe created by J.R.R. Tolkein, however, this game will not be part of any particular time in the universe. There races and enemies will generally be from the novels and some will be exracted as possible outcomes of the world (i.e. half-elf, dwelf (dwarf elf mix)).
+
+version .01 is going to attempt to have the following working:
+
+1) create the world
+2) create a generic character
+3) create enemies
+4) handle basic combat
