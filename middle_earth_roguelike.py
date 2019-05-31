@@ -1,18 +1,57 @@
+import pygame
 import tcod
 import sys
+from entity.entity import Creature
+from game_map.map import Map
+from layers.console_layers import MainConsole, NewConsole
 
-screen_width = 80
-screen_height = 60
-playerx = int(screen_width/2)
-playery = int(screen_height/2)
+def handle_keys():
+	key = tcod.console_wait_for_keypress(True)
 
-tcod.console_set_custom_font('arial10x10.png', tcod.FONT_TYPE_GRAYSCALE | tcod.FONT_LAYOUT_TCOD)
+	if key.vk == tcod.KEY_ENTER and key.lalt:
+		tcod.console_set_fullscreen(not tcod.console_is_fullscreen())
 
-tcod.console_init_root(screen_width, screen_height, 'Middle Earth RL', False)
+	elif key.vk == tcod.KEY_ESCAPE:
+		return True
+
+	if tcod.console_is_key_pressed(tcod.KEY_UP):
+		player.movement(0, -1)
+
+	elif tcod.console_is_key_pressed(tcod.KEY_DOWN):
+		player.movement(0, 1)
+
+	elif tcod.console_is_key_pressed(tcod.KEY_LEFT):
+		player.movement(-1, 0)
+
+	elif tcod.console_is_key_pressed(tcod.KEY_RIGHT):
+		player.movement(1, 0)
+
+pygame.init()
+
+root_layer = MainConsole()
+npc_layer = NewConsole(root_layer.screen_width, root_layer.screen_height)
+
+player = Creature(int(root_layer.screen_width/2), int(root_layer.screen_height/2), '@', tcod.green, npc_layer)
+npc = Creature(int(root_layer.screen_width/2 - 5), int(root_layer.screen_height/2), '@', tcod.yellow, npc_layer)
+creatures = [player, npc]
+
+current_map = Map(root_layer)
 
 while not tcod.console_is_window_closed():
-	tcod.console_set_default_foreground(0, tcod.green)
+	current_map.render_map()
 
-	tcod.console_put_char(0, playerx, playery, '@', tcod.BKGND_NONE)
+	for entity in creatures:
+		entity.draw()
 
-	tcod.console_flush()
+	root_layer.add_layer(npc_layer)
+
+	root_layer.update()
+
+	for entity in creatures:
+		entity.clear()
+
+	#key = pygame.event.poll()
+
+	key_press = handle_keys()
+	if key_press:
+		break
