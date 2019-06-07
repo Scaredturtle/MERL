@@ -31,11 +31,11 @@ class Player(Creature):
         elif key.vk == tcod.KEY_ESCAPE:
             return True
 
-        if tcod.console_is_key_pressed(tcod.KEY_UP):
+        if key.vk == tcod.KEY_UP:
             self.movement(0, -1)
-        elif tcod.console_is_key_pressed(tcod.KEY_DOWN):
+        elif key.vk == tcod.KEY_DOWN:
             self.movement(0, 1)
-        elif tcod.console_is_key_pressed(tcod.KEY_LEFT):
+        elif key.vk == tcod.KEY_LEFT:
             self.movement(-1, 0)
-        elif tcod.console_is_key_pressed(tcod.KEY_RIGHT):
+        elif key.vk == tcod.KEY_RIGHT:
             self.movement(1, 0)

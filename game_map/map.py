@@ -16,8 +16,8 @@ class Rect():
 
 class Map():
     def __init__(self, con):
-        self.map_width = 60
-        self.map_height = 45
+        self.map_width = con.screen_width
+        self.map_height = con.screen_height
         self.grass_color = tcod.Color(100, 160, 20)
         self.tree_color = tcod.Color(80, 185, 0)
         self.con = con
@@ -26,10 +26,10 @@ class Map():
             for y in range(self.map_height)]
                 for x in range(self.map_width)]
 
-        #self.current_map[30][22].blocked = True
-        #self.current_map[30][22].sight = True
-        #self.current_map[50][22].blocked = True
-        #self.current_map[50][22].sight = True
+        self.current_map[30][22].blocked = True
+        self.current_map[30][22].sight = True
+        self.current_map[50][22].blocked = True
+        self.current_map[50][22].sight = True
 
     def create_room(self, room):
         pass
